@@ -17,3 +17,22 @@ webpack is included for comparing the outputs.
 `./webpack-dist` and `./rspack-dist` are purposely not added to `.gitignore`.
 
 It is recommended to commit these files so we quickly compare the outputs.
+
+# How to reproduce the issue with native watchers
+
+1. clone the repo
+2. install the dependencies (pnpm install)
+
+## Expected
+
+If we disable native watchers, we can see the expected behavior. 
+For convenience, I have wrapped it into the command `pnpm dev:normal`
+
+The dev server starts -> plugin touches the file -> dev server rebuild -> dev server stops
+
+## Actual
+
+If we enable native watcher, the behavior is different.
+For convenience, I have wrapped it into the command `pnpm dev:native`
+
+The dev server starts -> plugin touches the file -> dev server **DOES NOT** rebuild

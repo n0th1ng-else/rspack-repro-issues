@@ -1,6 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import {ExitOnRebuiltPlugin} from "./plugin.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isRunningWebpack = !!process.env.WEBPACK;
@@ -10,7 +11,7 @@ if (!isRunningRspack && !isRunningWebpack) {
 }
 
 /**
- * @type {import('webpack').Configuration | import('@rspack/cli').Configuration}
+ * @type {import('@rspack/cli').Configuration}
  */
 const config = {
   mode: "development",
@@ -18,7 +19,7 @@ const config = {
   entry: {
     main: "./src/index",
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin(), new ExitOnRebuiltPlugin()],
   output: {
     clean: true,
     path: isRunningWebpack
@@ -28,6 +29,7 @@ const config = {
   },
   experiments: {
     css: true,
+      nativeWatcher: process.env.NATIVE_WATCHER === 'true'
   },
 };
 

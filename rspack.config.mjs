@@ -1,13 +1,12 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import {CircularDependencyRspackPlugin} from '@rspack/core'
+import RspackCircularDependencyPlugin from "rspack-circular-dependency-plugin";
+import CircularDependencyPlugin from 'circular-dependency-plugin'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const isRunningWebpack = !!process.env.WEBPACK;
-const isRunningRspack = !!process.env.RSPACK;
-if (!isRunningRspack && !isRunningWebpack) {
-  throw new Error("Unknown bundler");
-}
+const isNativePlugin = process.env.RSPACK_PLUGIN === '1'
 
 /**
  * @type {import('webpack').Configuration | import('@rspack/cli').Configuration}
@@ -18,12 +17,35 @@ const config = {
   entry: {
     main: "./src/index",
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+      new HtmlWebpackPlugin(),
+    isNativePlugin ? new CircularDependencyRspackPlugin({
+      failOnError: true,
+      allowAsyncCycles: false,
+      exclude: /node_modules/,
+      onEnd() {
+        console.log('EXTERNAL RspackCircularDependencyPlugin')
+      }
+    }) :     new RspackCircularDependencyPlugin({
+      failOnError: true,
+      allowAsyncCycles: false,
+      exclude: /node_modules/,
+      onEnd() {
+        console.log('NATIVE CircularDependencyRspackPlugin')
+      }
+    }),
+    // new CircularDependencyPlugin({
+    // 	failOnError: true,
+    // 	allowAsyncCycles: false,
+    // 	exclude: /node_modules/,
+    // 	onEnd() {
+    // 		console.log('WEBPACK CircularDependencyPlugin')
+    // 	}
+    // }),
+  ],
   output: {
     clean: true,
-    path: isRunningWebpack
-      ? path.resolve(__dirname, "webpack-dist")
-      : path.resolve(__dirname, "rspack-dist"),
+    path: path.resolve(__dirname, "rspack-dist"),
     filename: "[name].js",
   },
   experiments: {

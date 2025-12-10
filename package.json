@@ -3,17 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "npm-run-all build:* --sequential --print-name",
-    "build:rspack": "cross-env RSPACK=1 rspack",
-    "build:rsbuild": "rsbuild build",
-    "build:webpack": "cross-env WEBPACK=1 webpack -c ./rspack.config.mjs",
-    "dev:rspack": "cross-env RSPACK=1 rspack dev",
-    "dev:rsbuild": "rsbuild dev",
-    "dev:webpack": "cross-env WEBPACK=1 webpack serve -c ./rspack.config.mjs"
+    "native:plugin": "cross-env RSPACK_PLUGIN=1 rspack",
+    "external:plugin": "cross-env RSPACK_PLUGIN=0 rspack"
   },
   "dependencies": {
-    "@rspack/cli": "^1.4.10",
-    "@rspack/core": "^1.4.10",
+    "@rspack/cli": "^1.6.7",
+    "@rspack/core": "^1.6.7",
     "html-webpack-plugin": "^5.6.3",
     "webpack": "^5.101.0",
     "webpack-cli": "^6.0.1",
@@ -22,7 +17,9 @@
   "devDependencies": {
     "@rsbuild/core": "^1.4.11",
     "cross-env": "^10.0.0",
-    "npm-run-all2": "^8.0.4"
+    "npm-run-all2": "^8.0.4",
+    "rspack-circular-dependency-plugin": "0.0.7",
+    "circular-dependency-plugin": "5.2.2"
   },
   "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501"
 }

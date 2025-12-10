@@ -14,6 +14,9 @@ importers:
       '@rspack/core':
         specifier: ^1.4.10
         version: 1.4.10(@swc/helpers@0.5.17)
+      envinfo:
+        specifier: ^7.21.0
+        version: 7.21.0
       html-webpack-plugin:
         specifier: ^5.6.3
         version: 5.6.3(@rspack/core@1.4.10(@swc/helpers@0.5.17))(webpack@5.101.0)
@@ -677,8 +680,8 @@ packages:
   entities@2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
 
-  envinfo@7.14.0:
-    resolution: {integrity: sha512-CO40UI41xDQzhLB1hWyqUKgFhs250pNcGbyGKe1l/e4FSaI/+YE4IMG76GDt0In67WLPACIITC+sOi08x4wIvg==}
+  envinfo@7.21.0:
+    resolution: {integrity: sha512-Lw7I8Zp5YKHFCXL7+Dz95g4CcbMEpgvqZNNq3AmlT5XAV6CgAAk6gyAMqn2zjw08K9BHfcNuKrMiCPLByGafow==}
     engines: {node: '>=4'}
     hasBin: true
 
@@ -2327,7 +2330,7 @@ snapshots:
 
   entities@2.2.0: {}
 
-  envinfo@7.14.0: {}
+  envinfo@7.21.0: {}
 
   es-define-property@1.0.0:
     dependencies:
@@ -3164,7 +3167,7 @@ snapshots:
       colorette: 2.0.20
       commander: 12.1.0
       cross-spawn: 7.0.3
-      envinfo: 7.14.0
+      envinfo: 7.21.0
       fastest-levenshtein: 1.0.16
       import-local: 3.1.0
       interpret: 3.1.1
